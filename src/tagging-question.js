@@ -42,6 +42,11 @@ export class TaggingQuestion extends DDD {
           margin: 5px;
           cursor: move;
         }
+
+        .hax-icon {
+          height: 30%;
+          width: 30%;
+        }
       `
     ];
   }
@@ -51,12 +56,23 @@ export class TaggingQuestion extends DDD {
       <div class="interactive-element">
         
         <div class="image">
-          <img src="https://hax.psu.edu/7d3549e0.png" alt="Your Image">
+         <img src="./Hax-Logo.png" class="hax-icon" alt="Your Image">
         </div>
         <div class="question">
-          <label for="tagging-input">Question:</label>
-          <input type="text" id="tagging-input" placeholder="Type your answer here...">
+          <label for="tagging-input">Question: What do you think of this image? </label>
+          <br/>
+          <br/>
+          <ul>
+            <li>option 1</li>
+            <li>option 2</li>
+            <li>option 3</li>
+            <li>option 4</li>
+          </ul>
+
         </div>
+        <div>
+          <input type="text" />
+          </div>
         <div class="tags-container">
           <div class="tags">
             ${this.renderAvailableTags()}
