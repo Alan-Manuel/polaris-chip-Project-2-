@@ -44,11 +44,10 @@ export class taggingquestion extends DDD {
         return html`
           <div class="interactive-element">
             <div class="question">
-              <!-- Question content will be here -->
+            <label for="tagging-input">Question:</label>
+              <input type="text" id="tagging-input" placeholder="Type your answer here...">
             </div>
-            <div class="image">
-              *//
-            </div>
+            <div class="image"></div>
             <div class="tags-container">
               <div class="tags">
                 <!-- Available tags to choose from should also update and visible to the user -->
