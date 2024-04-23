@@ -14,9 +14,11 @@ export class TaggingQuestion extends DDD {
   }
 
   firstUpdated() {
-    fetch('tag_data.json')
+    fetch('tagdata.json')
       .then(response => response.json())
       .then(data => {
+        console.log("collecting data")
+        console.log(data)
         this.tagData = data;
         this.requestUpdate();
       })
@@ -47,6 +49,7 @@ export class TaggingQuestion extends DDD {
           height: 30%;
           width: 30%;
         }
+        
       `
     ];
   }
@@ -63,10 +66,7 @@ export class TaggingQuestion extends DDD {
           <br/>
           <br/>
           <ul>
-            <li>option 1</li>
-            <li>option 2</li>
-            <li>option 3</li>
-            <li>option 4</li>
+            
           </ul>
 
         </div>
