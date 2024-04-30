@@ -49,6 +49,13 @@ export class TaggingQuestion extends DDD {
           height: 30%;
           width: 30%;
         }
+
+        .answer-area {
+          border: 3px solid #ccc;
+          padding: 5px;
+          margin-top: 5px;
+          min-height: 80px;
+        }
         
       `
     ];
@@ -62,18 +69,13 @@ export class TaggingQuestion extends DDD {
          <img src="./Hax-Logo.png" class="hax-icon" alt="Your Image">
         </div>
         <div class="question">
-          <label for="tagging-input">Question: What do you think of this image? </label>
-          <br/>
-          <br/>
-          <ul>
-            
-          </ul>
-
+          <label for="tagging-input">Question: Which of the following big ideas would YOU associate with this artistic work? </label>
         </div>
-        <div>
-          <input type="text" />
-          </div>
-        <div class="tags-container">
+
+
+
+        
+       <div class="tags-container">
           <div class="tags">
             ${this.renderAvailableTags()}
           </div>
@@ -94,7 +96,7 @@ export class TaggingQuestion extends DDD {
 
   renderAvailableTags() {
     return this.tagData.map(tag => html`
-      <div class="tag" draggable="true" @dragstart="${this.handleDragStart}">
+      <div class="tag" draggable="true" @dragstart="${this.handleDragStart}" data-id="${tag.tag}">
         ${tag.tag}
       </div>
     `);
@@ -119,17 +121,32 @@ export class TaggingQuestion extends DDD {
   }
 
   handleDragStart(event) {
-    event.dataTransfer.setData('text/plain', event.target.textContent);
+    const tagId = event.target.getAttribute('data-id');
+    event.dataTransfer.setData('text/plain', tagId);
+
+    //event.dataTransfer.setData('text/plain', event.target.textContent);
   }
 
   handleDrop(event) {
     event.preventDefault();
-    const data = event.dataTransfer.getData('text/plain');
-    if (!this.answerTags.includes(data)) {
-      this.answerTags = [...this.answerTags, data];
+    const tagId = event.dataTransfer.getData('text/plain');
+    if (!this.answerTags.includes(tagId)) {
+      this.answerTags = [...this.answerTags, tagId];
       this.requestUpdate();
     }
   }
+
+  //handleDrop(event) {
+    //event.preventDefault();
+    //const data = event.dataTransfer.getData('text/plain');
+  //  const tagId = event.target.getAttribute('data-id');
+   // if (!this.answerTags.includes(tagId)) {
+    //  this.answerTags = [...this.answerTags, tagId];
+     // this.tagData[tagId].draggable = false;
+     
+  //  }
+   // this.requestUpdate();
+//  }
 
   handleDragOver(event) {
     event.preventDefault();
@@ -141,6 +158,9 @@ export class TaggingQuestion extends DDD {
   }
 
   reset() {
+    this.tagData.forEach(tag => {
+      tag.draggable = true;
+    });
     this.answerTags = [];
     this.correctAnswer = [];
     this.requestUpdate();
@@ -157,4 +177,3 @@ customElements.define(TaggingQuestion.tag, TaggingQuestion);
 
     */
     
-
