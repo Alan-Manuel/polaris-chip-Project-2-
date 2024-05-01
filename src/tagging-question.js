@@ -43,19 +43,21 @@ export class TaggingQuestion extends DDD {
     return [
       super.styles,
       css`
-        .answer-area {
-          border: 2px solid #ccc;
-          padding: 10px;
-          margin-top: 10px;
-        }
-
         .tag {
           display: inline-block;
-          background-color: #ddd;
-          padding: 5px 10px;
-          margin: 5px;
+          background-color: var(--ddd-theme-default-limestoneLight);
+          padding: var(--ddd-spacing-2) var(--ddd-spacing-5);
+          margin: var(--ddd-spacing-2);
+          transform: scale(1.1);
           cursor: move;
         }
+        .tag:hover{
+          background-color: var(--ddd-theme-default-creekLight) ;
+        }
+        .tags-container {
+          flex-direction: column; /* Stack tags vertically on smaller screens */
+          }
+        
 
         .hax-icon {
           height: 30%;
@@ -63,52 +65,81 @@ export class TaggingQuestion extends DDD {
         }
 
         .answer-area {
-          border: 3px solid hotpink;
-          padding: 5px;
-          margin-top: 5px;
+          border: 3px solid var(--ddd-theme-default-shrineTan);
+          border-radius:var(--ddd-radius-md);
+          padding: var(--ddd-spacing-5);
+          margin-top: var(--ddd-spacing-5);
           min-height: 80px;
+          background-color: var(--ddd-theme-default-alertUrgent);
         }
+
         .tag.correct {
-          border: 2px solid green;
+          border: 2px solid var(--ddd-theme-default-opportunityGreen);
         }
 
         .tag.incorrect {
-          border: 2px solid red;
+          border: 2px solid var(--ddd-theme-default-original87Pink) ;
+        }
+        .check-answer:hover {
+        margin-top: var(--ddd-spacing-2);
+        padding: var(--ddd-spacing-1) var(--ddd-spacing-1);
+        background-color: var(--ddd-theme-default-futureLime); 
+        color: var(--ddd-theme-default-white);
+        transform: scale(1.1); 
+        cursor: pointer;
+        }
+
+       
+        .reset:hover {
+        margin-top: var(--ddd-spacing-2);
+        padding: var(--ddd-spacing-1) var(--ddd-spacing-1);
+        background-color: var(--ddd-theme-default-athertonViolet); 
+        color: var(--ddd-theme-default-white);
+        transform: scale(1.1); 
+        cursor: pointer;
         }
 
         .disabled {
+          background-color: var(--ddd-theme-default-limestoneGray);
           pointer-events: none; // Disable pointer events for tags in the answer area
           opacity: 0.5; // Optionally reduce opacity for disabled tags
         }
+        .question {
+          font-weight: bold;
+          font-size:var(--ddd-spacing-5);
+        }
+       
       `
     ];
   }
 
   render() {
     return html`
-      <div class="interactive-element">
-        <div class="image">
-          <img src="${this.image}" class="hax-icon">
-        </div>
-        <div class="question">
-          <p>${this.question}</p>  
-        </div>
-        <div class="tags-container">
-          <div class="tags">
-            ${this.renderAvailableTags()}
+      <confetti-container id="confetti">
+        <div class="interactive-element">
+          <div class="image">
+            <img src="${this.image}" class="hax-icon">
           </div>
-          <div class="answer-area" @drop="${this.handleDrop}" @dragover="${this.handleDragOver}">
-            ${this.renderAnswerArea()}
+          <div class="question">
+            <p>${this.question}</p>  
+          </div>
+          <div class="tags-container">
+            <div class="tags">
+              ${this.renderAvailableTags()}
+            </div>
+            <div class="answer-area" @drop="${this.handleDrop}" @dragover="${this.handleDragOver}">
+              ${this.renderAnswerArea()}
+            </div>
+          </div>
+          <div class="feedback">
+            ${this.renderFeedback()}
+          </div>
+          <div class="buttons">
+            <button class="check-answer" @click="${this.checkAnswer}" ?disabled="${this.answersChecked}">Check Answer</button>
+            <button class="reset" @click="${this.reset}">Reset</button>
           </div>
         </div>
-        <div class="feedback">
-          ${this.renderFeedback()}
-        </div>
-        <div class="buttons">
-          <button class="check-answer" @click="${this.checkAnswer}" ?disabled="${this.answersChecked}">Check Answer</button>
-          <button class="reset" @click="${this.reset}">Reset</button>
-        </div>
-      </div>
+      </confetti-container>
     `;
   }
 
@@ -132,13 +163,6 @@ export class TaggingQuestion extends DDD {
     const tagId = event.target.getAttribute('data-id');
     event.dataTransfer.setData('text/plain', tagId);
   }
-  
-
-  /*handleDragStart(event) {
-    const tagId = event.target.getAttribute('data-id');
-    event.dataTransfer.setData('text/plain', tagId);
-  }*/
-
 
   handleDrop(event) {
     event.preventDefault();
@@ -151,16 +175,6 @@ export class TaggingQuestion extends DDD {
         this.answerTags = [...this.answerTags, tagId];
         this.requestUpdate();
       }
-    } else if (event.type === 'click') {
-      // Handle click event to move tag between areas
-      if (this.answerTags.includes(tagId)) {
-        // Remove tag from solution area
-        this.answerTags = this.answerTags.filter(tag => tag !== tagId);
-      } else {
-        // Move tag to solution area
-        this.answerTags = [...this.answerTags, tagId];
-      }
-      this.requestUpdate();
     }
   }
   
@@ -170,8 +184,7 @@ export class TaggingQuestion extends DDD {
     
     if (isAnswerArea) {
       // Remove tag from solution area
-      this.answerTags = this.answerTags.filter(tag => tag !== tagId);
-      this.requestUpdate();
+      this.toggleAnswer(tagId);
     } else {
       // Move tag to solution area
       if (!this.answerTags.includes(tagId)) {
@@ -181,16 +194,14 @@ export class TaggingQuestion extends DDD {
     }
   }  
 
-  /*handleDrop(event) {
-    if (!this.answersChecked) {
-      const tagId = event.dataTransfer.getData('text/plain');
-      event.preventDefault();
-      if (!this.answerTags.includes(tagId)) {
-        this.answerTags = [...this.answerTags, tagId];
-        this.requestUpdate();
-      }
+  toggleAnswer(tagId) {
+    if (this.answerTags.includes(tagId)) {
+      this.answerTags = this.answerTags.filter(tag => tag !== tagId);
+    } else {
+      this.answerTags = [...this.answerTags, tagId];
     }
-  }*/
+    this.requestUpdate();
+  }
 
   handleDragOver(event) {
     event.preventDefault();
@@ -201,7 +212,7 @@ export class TaggingQuestion extends DDD {
     this.shadowRoot.querySelectorAll('.tag').forEach(tag => {
       tag.classList.remove('correct', 'incorrect');
     });
-
+  
     this.correctAnswer = [];
     this.answerTags.forEach(tag => {
       const isCorrect = this.tagData.find(t => t.tag === tag).correct;
@@ -209,19 +220,21 @@ export class TaggingQuestion extends DDD {
       this.correctAnswer.push({ tag, isCorrect, feedback });
       this.shadowRoot.querySelector(`.tag[data-id="${tag}"]`).classList.add(isCorrect ? 'correct' : 'incorrect');
     });
-
+  
     this.answersChecked = true; // Disable dragging into answer area
+  
+    // Check if all answers are correct
+    const allCorrect = this.correctAnswer.every(entry => entry.isCorrect);
+    if (allCorrect) {
+      this.makeItRain(); // Trigger confetti effect
+    }
+  
     this.requestUpdate(); 
   }
 
   reset() {
     // Shuffle the tagData array
     this.tagData = this.shuffleArray(this.tagData);
-    
-    // Set draggable property to true for all tags
-    this.tagData.forEach(tag => {
-      tag.draggable = true;
-    });
     
     // Clear answerTags and correctAnswer arrays
     this.answerTags = [];
@@ -255,7 +268,19 @@ export class TaggingQuestion extends DDD {
       return html``;
     }
   }
+
+  makeItRain() {
+    const allCorrect = this.correctAnswer.every(entry => entry.isCorrect);
   
+    if (allCorrect) {
+      import('@lrnwebcomponents/multiple-choice/lib/confetti-container.js').then((module) => {
+        setTimeout(() => {
+          this.shadowRoot.querySelector("#confetti").setAttribute("popped", "");
+        }, 0);
+      });
+    }
+  }
+
   static get properties() {
     return {
       ...super.properties,

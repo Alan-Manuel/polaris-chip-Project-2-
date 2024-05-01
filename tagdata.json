@@ -2,36 +2,36 @@
     {
       "tag": "good form",
       "correct": true,
-      "feedback": "The shape of the vase clearly demonstrates craftsmanship"
+      "feedback": "Correct: The shape of the vase clearly demonstrates craftsmanship"
     },
     {
       "tag": "poor taste",
       "correct": false,
-      "feedback": "Taste is in the eye of the designer as well as the viewer."
+      "feedback": "Incorrect: Taste is in the eye of the designer as well as the viewer."
     },
     {
       "tag": "contrasting themes",
       "correct": false,
-      "feedback": "There is uniformity in the shape, but there is no depth to this media to imply that it is contrasting with other figures."
+      "feedback": "Incorrect: There is uniformity in the shape, but there is no depth to this media to imply that it is contrasting with other figures."
     },
     {
       "tag": "AI",
       "correct": true,
-      "feedback": "While a modification of prior work, this is still AI generative work."
+      "feedback": "Correct: While a modification of prior work, this is still AI generative work."
     },
     {
       "tag": "shading",
       "correct": false,
-      "feedback": "While there is a light source and a shadow cast, shading is a term used for pencil based sketching."
+      "feedback": "Incorrect: While there is a light source and a shadow cast, shading is a term used for pencil based sketching."
     },
     {
       "tag": "original work",
       "correct": true,
-      "feedback": "This character is not based on any person, place, or existing trope."
+      "feedback": "Correct: This character is not based on any person, place, or existing trope."
     },
     {
       "tag": "accessible",
       "correct": false,
-      "feedback": "The color scheme, while high contrast in some areas, loses form in others and has written text unrelated to the character."
+      "feedback": "Incorrect: The color scheme, while high contrast in some areas, loses form in others and has written text unrelated to the character."
     }
   ]

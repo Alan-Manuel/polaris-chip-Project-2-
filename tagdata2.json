@@ -2,55 +2,55 @@
     {
     "tag": "character design",
     "correct": true,
-    "feedback": "The design of the Fall Guys characters is unique and recognizable, with their distinctive round bodies and vibrant colors."
+    "feedback": "Correct: The design of the Fall Guys characters is unique and recognizable, with their distinctive round bodies and vibrant colors."
   },
   {
     "tag": "cartoonish",
     "correct": false,
-    "feedback": "While the characters may have exaggerated features typical of cartoons, the level of detail in the image suggests a more sophisticated art style."
+    "feedback": "Incorrect: While the characters may have exaggerated features typical of cartoons, the level of detail in the image suggests a more sophisticated art style."
   },
   {
     "tag": "playful",
     "correct": true,
-    "feedback": "The image captures the playful and whimsical nature of the Fall Guys game, with the characters engaging in lighthearted antics."
+    "feedback": "Correct: The image captures the playful and whimsical nature of the Fall Guys game, with the characters engaging in lighthearted antics."
   },
   {
     "tag": "action-packed",
     "correct": false,
-    "feedback": "The image lacks dynamic movement or intense action, instead focusing on the characters' charming interactions and expressions."
+    "feedback": "Incorrect: The image lacks dynamic movement or intense action, instead focusing on the characters' charming interactions and expressions."
   },
   {
     "tag": "pop culture reference",
     "correct": true,
-    "feedback": "The presence of Fall Guys characters in the image references the popular video game, making it relevant to contemporary pop culture."
+    "feedback": "Correct: The presence of Fall Guys characters in the image references the popular video game, making it relevant to contemporary pop culture."
   },
   {
     "tag": "minimalistic",
     "correct": false,
-    "feedback": "The image features intricate details in the characters' costumes and expressions, which is contrary to the simplicity often associated with minimalistic art."
+    "feedback": "Incorrect: The image features intricate details in the characters' costumes and expressions, which is contrary to the simplicity often associated with minimalistic art."
   },
   {
     "tag": "wholesome",
     "correct": true,
-    "feedback": "The image exudes a sense of wholesomeness and innocence, characteristic of the family-friendly appeal of Fall Guys."
+    "feedback": "Correct: The image exudes a sense of wholesomeness and innocence, characteristic of the family-friendly appeal of Fall Guys."
   },
   {
     "tag": "surreal",
     "correct": false,
-    "feedback": "While the characters may inhabit fantastical worlds within the game, the image itself does not present a dreamlike or illogical composition that defines surrealism."
+    "feedback": "Incorrect: While the characters may inhabit fantastical worlds within the game, the image itself does not present a dreamlike or illogical composition that defines surrealism."
   },
 
   {
 
     "tag": "bad",
     "correct": false,
-    "feedback": "Look at these guys, how could you say this bad!It's all good though,everyone has their perspective I guess. :("
+    "feedback": "Incorrect: How can you say these guys look bad? Well, everyone has their perspective I guess. :("
   },
 
   {
     "tag": "creative",
     "correct": true,
-    "feedback": "Yeah this image really is creative,considering it replicates winning in the game! :0"
+    "feedback": "Correct: This image is super creative since it depicts a winning moment in-game and the struggle for survival. :)"
 
   }
 ]
