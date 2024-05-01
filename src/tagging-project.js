@@ -1,9 +1,9 @@
 import { LitElement, html, css } from 'lit';
 import { DDD } from "@lrnwebcomponents/d-d-d/d-d-d.js";
 
-export class TaggingQuestion extends DDD {
+export class TaggingProject extends DDD {
   static get tag() {
-    return 'tagging-question';
+    return 'tagging-project';
   }
 
   constructor() {
@@ -134,10 +134,12 @@ export class TaggingQuestion extends DDD {
           <div class="feedback">
             ${this.renderFeedback()}
           </div>
+          <br/>
           <div class="buttons">
             <button class="check-answer" @click="${this.checkAnswer}" ?disabled="${this.answersChecked}">Check Answer</button>
             <button class="reset" @click="${this.reset}">Reset</button>
           </div>
+          <br/>
         </div>
       </confetti-container>
     `;
@@ -294,4 +296,4 @@ export class TaggingQuestion extends DDD {
   }
 }
 
-customElements.define(TaggingQuestion.tag, TaggingQuestion);
+customElements.define(TaggingProject.tag, TaggingProject);
